@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS CLOCK</title>
+</head>
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        background: url(https://images.unsplash.com/photo-1541450711770-551bbd9ab9d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80);
+        background-size: cover;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+    .container #clock h2 {
+        text-align: center;
+        /* margin-bottom: rem; */
+    }
+
+    .container #clock {
+        width: 25rem;
+        height: 25rem;
+        position: relative;
+        margin: 5rem auto;
+        
+    }
+
+    .container #clock .clock-face {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        /* background-color: #f9f9f9; */
+        position: relative;
+        /* box-shadow: rgba(220, 51, 51, 0.35) 0px 5px 15px; */
+        border: 10px double black;
+    }
+
+    .container #clock .clock-face .number {
+        position: absolute;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .container #clock .clock-face .top {
+        color: blue;
+        top: 1rem;
+        left: 47%;
+    }
+
+    .container #clock .clock-face .right {
+        color: blue;
+        top: 47%;
+        right: 1rem;
+    }
+
+    .container #clock .clock-face .bottom {
+        color: blue;
+        bottom: 1rem;
+        left: 47%;
+    }
+
+    .container #clock .clock-face .left {
+        color: blue;
+        top: 47%;
+        left: 1rem;
+    }
+
+    .container #clock .clock-face .hour-hand {
+        width: 30%;
+        height: 0.4rem;
+        background-color: #310823;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        transform-origin: 100%;
+        transform: rotate(90deg);
+    }
+
+    .container #clock .clock-face .min-hand {
+        width: 40%;
+        height: 0.3rem;
+        background-color: #310823;
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        transform-origin: 100%;
+        transform: rotate(90deg);
+    }
+
+    .container #clock .clock-face .second-hand {
+        width: 50%;
+        height: 0.2rem;
+        background-color: #310823;
+        position: absolute;
+        top: 50%;
+        transform-origin: 100%;
+        transform: rotate(90deg);
+    }
+    
+</style>
+
+<body>
+    <div class="container">
+        <div id="clock">
+            <h2>Clock using JS and CSS</h2>
+            <div class="clock-face">
+                <div class="number top">12</div>
+                <div class="number right">3</div>
+                <div class="number bottom">6</div>
+                <div class="number left">9</div>
+                <div class="hand hour-hand"></div>
+                <div class="hand min-hand"></div>
+                <div class="hand second-hand"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const secondHand = document.querySelector(".second-hand")
+    const minHand = document.querySelector(".min-hand")
+    const hourHand = document.querySelector(".hour-hand")
+
+
+
+    function setClock() {
+        const now = new Date()
+
+        const seconds = now.getSeconds()
+        const secondsDegrees = ((seconds / 60) * 360) + 90
+        secondHand.style.transform = "rotate(" + secondsDegrees + "deg)"
+        // 'rotate(${secondsDegrees}deg)'
+
+        const minutes = now.getMinutes()
+        const minutesDegrees = ((minutes / 60) * 360) + 90
+        minHand.style.transform = `rotate(${minutesDegrees}deg)`
+
+        const hours = now.getHours()
+        const hoursDegrees = ((hours / 12) * 360) + 90
+        hourHand.style.transform = `rotate(${hoursDegrees}deg)`
+
+
+    }
+
+    setInterval(function () {
+        setClock()
+    }, 1000)
+
+    setClock()
+
+</script>
+
+</html>
